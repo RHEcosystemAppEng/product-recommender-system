@@ -1,0 +1,9 @@
+dependencies:
+- name: pgvector
+  repository: https://rh-ai-kickstart.github.io/ai-architecture-charts
+  version: 0.1.0
+- name: strimzi-kafka-operator
+  repository: https://strimzi.io/charts/
+  version: 0.46.0
+digest: sha256:c95638f7e7748d36e883f343972157efd32c2fcdca9596241367852d53b838c0
+generated: "2025-05-20T13:57:36.355918389-04:00"
