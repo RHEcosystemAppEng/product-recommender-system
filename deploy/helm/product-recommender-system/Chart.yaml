@@ -30,6 +30,9 @@ dependencies:
   - name: strimzi-kafka-operator
     repository: https://strimzi.io/charts/
     version: 0.46.0
+  - name: configure-pipeline
+    version: 0.1.0
+    repository: https://rh-ai-kickstart.github.io/ai-architecture-charts
 #  - name: llm-service
 #    version: 0.1.0
 #    repository: https://rh-ai-kickstart.github.io/ai-architecture-charts
