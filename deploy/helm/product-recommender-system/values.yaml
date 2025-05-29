@@ -106,9 +106,9 @@ tolerations: []
 
 affinity: {}
 
-pipelineJobImage: quay.io/yuvalturg/ml-pipeline-importer:0.0.2
-frontendImage: quay.io/yuvalturg/rec-sys-ui:0.0.3
-applicationImage: quay.io/yuvalturg/rec-sys-app:0.0.24
+pipelineJobImage: quay.io/ecosystem-appeng/rec-sys-workflow:0.0.2
+frontendImage: quay.io/ecosystem-appeng/rec-sys-ui:0.0.4
+applicationImage: quay.io/ecosystem-appeng/rec-sys-app:0.0.25
 
 dbName: product_recommender_system
 
