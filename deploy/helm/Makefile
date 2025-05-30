@@ -78,7 +78,7 @@ install: namespace depend
 	@$(eval LLM_SERVICE_ARGS := $(call helm_llm_service_args))
 	@$(eval LLAMA_STACK_ARGS := $(call helm_llama_stack_args))
 	@echo "Installing $(HELM_CHART) helm chart"
-	@helm upgrade --install $(HELM_CHART) $(HELM_CHART) -n $(NAMESPACE) \
+	@helm -n $(NAMESPACE) upgrade --install $(HELM_CHART) $(HELM_CHART) -n $(NAMESPACE) \
 		$(PGVECTOR_ARGS) \
 		$(LLM_SERVICE_ARGS) \
 		$(LLAMA_STACK_ARGS) \
@@ -91,7 +91,7 @@ install: namespace depend
 .PHONY: uninstall
 uninstall:
 	@echo "Uninstalling $(HELM_CHART) helm chart"
-	@helm uninstall $(HELM_CHART)
+	@helm -n $(NAMESPACE) uninstall $(HELM_CHART)
 	@echo "Removing pgvector and minio PVCs from $(NAMESPACE)"
 	@oc get pvc -n $(NAMESPACE) -o custom-columns=NAME:.metadata.name | grep -E '^(pg|minio)-data' | xargs -I {} oc delete pvc -n $(NAMESPACE) {} ||:
 	@echo "Deleting remaining pods in namespace $(NAMESPACE)"
