@@ -2,8 +2,14 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Optional
+from datetime import date
+import numpy as np
+from backend.routes import auth, products, recommendations, cart, orders, wishlist, feedback
 
 app = FastAPI()
+
+# Set random seed for reproducibility
+np.random.seed(42)
 
 # CORS Middleware
 app.add_middleware(
@@ -13,6 +19,25 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Include Routers
+app.include_router(auth.router)
+app.include_router(products.router)
+app.include_router(recommendations.router)
+app.include_router(cart.router)
+app.include_router(orders.router)
+app.include_router(wishlist.router)
+app.include_router(feedback.router)
+
+categories = ['Electronics', 'Books', 'Clothing', 'Home', 'Sports']
+subcategories = {
+    'Electronics': ['Smartphones', 'Laptops', 'Cameras', 'Audio', 'Accessories'],
+    'Books': ['Fiction', 'Non-fiction', 'Science', 'History', 'Self-help'],
+    'Clothing': ['Shirts', 'Pants', 'Dresses', 'Shoes', 'Accessories'],
+    'Home': ['Kitchen', 'Furniture', 'Decor', 'Bedding', 'Appliances'],
+    'Sports': ['Fitness', 'Outdoor', 'Team Sports', 'Footwear', 'Equipment']
+}
+
 
 # Mock data
 mock_products = [
@@ -25,19 +50,8 @@ user_views = {
     1: [mock_products[0], mock_products[2]]
 }
 
-feedbacks = []
 
-# Pydantic models
-class Feedback(BaseModel):
-    userId: int
-    productId: int
-    rating: float
-    comment: Optional[str] = None
-
-class LoginRequest(BaseModel):
-    email: str
-    password: str
-
+'''
 @app.get("/recommendations")
 def get_recommendations(userId: Optional[int] = None):
     print("recommendations called")
@@ -71,3 +85,4 @@ def login(login_req: LoginRequest):
     if login_req.email == "user@example.com" and login_req.password == "1234":
         return {"user": {"id": 1, "email": login_req.email, "name": "Sample User"}}
     raise HTTPException(status_code=401, detail="Invalid credentials")
+'''
